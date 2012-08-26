@@ -35,11 +35,5 @@ describe "Client" do
   end
   
   describe "public methods" do
-    describe "#reference" do
-      it "is the letters CL with a 6-zero-padded :id" do
-        client.stub(:id).and_return(3)
-        client.reference.should == 'CL000003'
-      end
-    end
   end
 end

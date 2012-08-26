@@ -4,7 +4,11 @@ class InvoiceItem < ActiveRecord::Base
   
   validates :amount, :name, :invoice, presence: true
   validates :amount, numericality: true
-  validates :amount, :name, :description, change: false, on: :update, :if => lambda{invoice.paid?}
-  validates :amount, :name, :description, change: false, on: :update, :if => lambda{invoice.sent?}
   
+  validate :invoice_sent_or_paid, :if => lambda{ invoice }
+  
+  private
+  def invoice_sent_or_paid
+    errors.add(:base, 'Invoice has already been issued') and return false if invoice.paid? or invoice.sent?
+  end
 end

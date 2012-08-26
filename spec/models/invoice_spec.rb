@@ -39,6 +39,13 @@ describe "Invoice" do
       end
     end
     
+    describe "#reference" do
+      it "is the letters JM with a 6-zero-padded :id" do
+        invoice.stub(:id).and_return(3)
+        invoice.reference.should == 'JM000003'
+      end
+    end
+    
     describe "#send!" do
       pending
     end
