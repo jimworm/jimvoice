@@ -4,7 +4,12 @@ describe "Invoice" do
   let(:invoice) { FactoryGirl.build :invoice }
   
   describe "attributes" do
-    
+    describe ":currency" do
+      it "is required" do
+        invoice.currency = nil
+        invoice.should_not be_valid
+      end
+    end
   end
   
   describe "associations" do

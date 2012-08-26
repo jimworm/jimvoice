@@ -5,4 +5,8 @@ class Client < ActiveRecord::Base
   
   validates :email, :name, presence: true
   validates :email, uniqueness: true, format: { with: /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }  
+  
+  def reference
+    format 'CL%06d', id
+  end
 end
