@@ -16,7 +16,11 @@ class Invoice < ActiveRecord::Base
     transaction do
       self.lock!
       InvoiceMailer.issue(self).deliver
-      self.update_attributes sent: true, sent_at: Date.today unless sent?
+      unless sent?
+        self.sent = true
+        self.sent_at = Date.today
+      end
+      self.save!
     end
   end
 end

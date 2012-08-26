@@ -47,7 +47,17 @@ describe "Invoice" do
     end
     
     describe "#send!" do
-      pending
+      before { invoice.save! }
+      
+      it "sets :sent to true" do
+        invoice.send!
+        invoice.should be_sent
+      end
+      
+      it "sets :sent_at to today" do
+        invoice.send!
+        invoice.sent_at.should == Date.today
+      end
     end
   end
 end
