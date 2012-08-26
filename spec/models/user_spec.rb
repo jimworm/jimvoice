@@ -10,8 +10,8 @@ describe "User" do
         user.should_not be_valid
       end
       
-      it "cannot be shorter than 4 characters" do
-        user.name = 'jil'
+      it "cannot be shorter than 3 characters" do
+        user.name = 'ji'
         user.should_not be_valid
       end
     end
