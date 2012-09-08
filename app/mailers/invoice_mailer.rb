@@ -1,5 +1,5 @@
 class InvoiceMailer < ActionMailer::Base
-  default from: "pete@jimsjamsmarmalades.com"
+  default from: "BillBot <billbot@jimsjamsmarmalades.com>"
   
   def issue(invoice)
     fail 'Only saved invoices can be issued' unless invoice.persisted?
