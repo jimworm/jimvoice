@@ -8,44 +8,57 @@ describe "InvoiceMailer" do
     
     before do
       2.times { invoice.items << FactoryGirl.build(:invoice_item, invoice: invoice) }
+      invoice.save!
     end
     
-    context "when not saved" do
-      it "raises an error" do
-        expect { mailer }.to raise_error
+    it "renders successfully" do
+      expect { mailer }.not_to raise_error
+    end
+  
+    it "is sent to the invoice's client" do
+      mailer.to.should include(invoice.client.email)
+    end
+    
+    it "has the right subject" do
+      mailer.subject.should include("Jim's Jams and Marmalades Invoice")
+    end
+    
+    context "when not in production" do
+      before { Rails.env.stub(:production?).and_return(false) }
+      after { Rails.env.unstub(:production?) }
+      
+      it "has a test subject" do
+        mailer.subject.should include('[TEST]')
       end
     end
     
-    context "when saved" do
-      before { invoice.save }
+    context "when in production" do
+      before { Rails.env.stub(:production?).and_return(true) }
+      after { Rails.env.unstub(:production?) }
       
-      it "renders successfully" do
-        expect { mailer }.not_to raise_error
-      end
-    
-      it "is sent to the invoice's client" do
-        mailer.to.should include(invoice.client.email)
-      end
-      
-      it "delivers successfully" do
-        expect { mailer.deliver }.not_to raise_error
-      end
-      
-      context "when not sent before" do
-        before { invoice.sent = false }
-      
-        it "is not marked as a copy" do
-          mailer.body.should_not include("INVOICE COPY")
-        end
-      end
-    
-      context "when sent before" do
-        before { invoice.sent = true }
-      
-        it "is marked as a copy" do
-          mailer.body.should include("INVOICE COPY")
-        end
+      it "doesn't have a test subject" do
+        mailer.subject.should_not include('[TEST]')
       end
     end
-  end
+    
+    it "delivers successfully" do
+      expect { mailer.deliver }.not_to raise_error
+    end
+    
+    context "when not sent before" do
+      before { invoice.sent = false }
+    
+      it "is not marked as a copy" do
+        mailer.body.should_not include("INVOICE COPY")
+      end
+    end
+  
+    context "when sent before" do
+      before { invoice.sent = true }
+    
+      it "is marked as a copy" do
+        mailer.body.should include("INVOICE COPY")
+      end
+    end
+  end # issue
 end

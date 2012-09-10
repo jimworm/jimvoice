@@ -13,6 +13,9 @@ class Invoice < ActiveRecord::Base
   end
   
   def send!
+    fail 'Only saved invoices can be issued' unless persisted?
+    fail 'Invoices must have items to be issued' if items.empty?
+    
     transaction do
       self.lock!
       InvoiceMailer.issue(self).deliver
