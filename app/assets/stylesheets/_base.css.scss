@@ -1,0 +1,42 @@
+$wallpaper_color: #ddd;
+$gutter_color: #ccc;
+$bg_color: #fff;
+
+
+body {
+  background: $wallpaper_color;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#mainwrap {
+  position: relative;
+  width: 60em;
+  margin: 0.5em auto;
+  padding: 1em;
+  background: $bg_color;
+  overflow: hidden;
+  font-size: 4mm;
+  border: 1px solid $gutter_color;
+}
+
+header {
+  display: block;
+  font-size: 0.8em;
+  margin: 0 0 2em;
+  overflow: hidden;
+  
+  p { float: right; }
+}
+
+
+
+
+
+h1 {
+  font-size: 1.6em;
+  border-bottom: 1px solid $gutter_color;
+  margin: 0 0 1em;
+}
+
+
+

@@ -5,7 +5,8 @@
   = csrf_meta_tags
 
 %body{ :class => "#{controller.controller_name} main" }
-  %header
-    Jim's Jams and Marmalades
-    %p= "Logged in as '#{current_user.name}'"
-  = yield
+  #mainwrap
+    %header
+      %p= "Logged in as '#{current_user.name}'"
+      Jim's Jams and Marmalades
+    = yield

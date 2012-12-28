@@ -1,3 +1,22 @@
+<% 
+module AssetPath
+  def self.sass_require(base_dir, *inside_dirs)
+    output = ""
+    Dir[File.join(base_dir, *inside_dirs, "/**/*")].each do |stylesheet_path|
+      unless File.directory?(stylesheet_path)
+      current_file_name = stylesheet_path.gsub(base_dir.to_s, '')
+      output << "@import '#{current_file_name}';\n"
+      end
+    end
+    output
+  end
+end
+%>
+
+@import 'reset';
+@import 'base';
+<%= AssetPath.sass_require( Rails.root.join('app/assets/stylesheets/'), 'components' ) %>
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -9,5 +28,5 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
  */
+ 

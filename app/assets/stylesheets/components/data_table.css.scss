@@ -1,0 +1,13 @@
+table#data_table {
+  width: 100%;
+  
+  thead {
+    tr {
+      border-bottom: 1px solid $gutter_color;
+      margin-bottom: 1em;
+    }
+    th {
+      text-align: left;
+    }
+  }
+}

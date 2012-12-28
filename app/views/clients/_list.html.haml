@@ -1,4 +1,6 @@
-%li
-  = client.name
-  = link_to 'Show invoices', '#', title: 'Not implemented'
-  = link_to 'New invoice', '#', title: 'Not implemented'
+%tr
+  %td= client.name
+  %td= client.invoices.last.try(:created_at)
+  %td
+    = link_to 'Show invoices', '#', title: 'Not implemented'
+    = link_to 'New invoice', '#', title: 'Not implemented'

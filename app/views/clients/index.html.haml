@@ -1,4 +1,9 @@
 %h1 Clients list
 
-%ul
-  = render partial: 'list', collection: @clients, as: :client
+%table#data_table
+  %thead
+    %tr
+      %th Name
+      %th Last invoice
+      %th Actions
+  %tbody= render partial: 'list', collection: @clients, as: :client

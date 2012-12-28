@@ -1,3 +1,7 @@
 Jimvoice::Application.routes.draw do
-  resources :clients
+  root to: 'home#index'
+  
+  resources :clients, only: :index do
+    # resources :invoices
+  end
 end

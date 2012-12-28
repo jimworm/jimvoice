@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
       return true
     end
     
-    authenticate_or_request_with_http_basic do |username, password|
+    authenticate_or_request_with_http_basic('Log in with your password in your encrypted password file') do |username, password|
       user = User.find_by_name(username)
       @current_user = user if user.try(:authenticate, password)
     end
