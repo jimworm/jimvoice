@@ -3,6 +3,7 @@ class Invoice < ActiveRecord::Base
   has_many :items, class_name: 'InvoiceItem', validate: true, autosave: true, dependent: :destroy
   
   validates :client, :currency, presence: true
+  validates :currency, length: {is: 3}
   
   def total
     items.sum(:amount)

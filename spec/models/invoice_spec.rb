@@ -9,6 +9,14 @@ describe "Invoice" do
         invoice.currency = nil
         invoice.should_not be_valid
       end
+      
+      it "must be 3 characters long (ISO 4217)" do
+        invoice.currency = 'un'
+        invoice.should_not be_valid
+        
+        invoice.currency = 'uned'
+        invoice.should_not be_valid
+      end
     end
   end
   

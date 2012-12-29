@@ -1,13 +1,8 @@
 require 'spec_helper'
 
 describe ClientsController do
-  let(:client1) { FactoryGirl.create :client, name: 'Dooby Doo Corp' }
-  let(:client2) { FactoryGirl.create :client, name: 'Shooby Dua Ltd' }
-  
-  before do
-    client1
-    client2
-  end
+  let!(:client1) { FactoryGirl.create :client, name: 'Dooby Doo Corp' }
+  let!(:client2) { FactoryGirl.create :client, name: 'Shooby Dua Ltd' }
   
   describe "#index" do
     render_views
@@ -19,10 +14,9 @@ describe ClientsController do
     end
     
     it "links to the clients' invoice index pages" do
-      pending
-      # get :index
-      # click_link "#show_client_#{client1.id}"
-      # response.should have_content 'Dooby Doo Corp'
+      get :index
+      response.body.should include "href=\"#{client_invoices_path(client1)}\"",
+                                   "href=\"#{client_invoices_path(client2)}\""
     end
   end
 end

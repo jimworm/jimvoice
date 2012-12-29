@@ -4,10 +4,16 @@ table#data_table {
   thead {
     tr {
       border-bottom: 1px solid $gutter_color;
-      margin-bottom: 1em;
     }
     th {
       text-align: left;
     }
   }
+  
+  tbody {
+    td {
+      padding: 0.5em 0.5em 1em 0;
+    }
+  }
+  
 }

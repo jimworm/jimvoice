@@ -1,0 +1,4 @@
+%tr
+  %td= "#{invoice.reference} #{'(unsent)' if not invoice.sent?}"
+  %td= invoice.total
+  %td= invoice.currency.upcase
