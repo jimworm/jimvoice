@@ -49,7 +49,10 @@ describe InvoicesController do
     end
     
     context "when invalid" do
-      pending
+      it "renders the form again" do
+        post :create, client_id: client, invoice: {currency: ''}
+        response.should render_template 'invoices/new'
+      end
     end
   end
   
