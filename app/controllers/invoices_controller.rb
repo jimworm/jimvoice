@@ -18,10 +18,14 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    @invoice = Invoice.find(params[:id])
   end
   
   private
+  def invoice
+    @invoice ||= client.invoices.find(params[:id])
+  end
+  helper_method :invoice
+  
   def client
     @client ||= Client.find(params[:client_id])
   end

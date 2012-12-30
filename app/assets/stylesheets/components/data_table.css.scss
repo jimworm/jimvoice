@@ -16,4 +16,13 @@ table#data_table {
     }
   }
   
+  tfoot {
+    td {
+      padding: 0.5em 0.5em 0.5em 0;
+    }
+    td:nth-child(2) {
+      border-top: 1px solid $gutter_color;
+      border-bottom: 3px ridge $gutter_color;
+    }
+  }
 }

@@ -1,0 +1,9 @@
+%tr
+  %td
+    %h6
+      = invoice_item.name
+      -if not invoice.issued?
+        = "(#{link_to('edit', edit_client_invoice_invoice_item_path(client, invoice, invoice_item))} | ".html_safe
+        = "#{link_to('delete', client_invoice_invoice_item_path(client, invoice, invoice_item), method: :delete)})".html_safe
+    %p=invoice_item.description
+  %td= invoice_item.amount

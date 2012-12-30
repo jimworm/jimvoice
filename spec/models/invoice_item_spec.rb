@@ -54,7 +54,17 @@ describe "InvoiceItem" do
   end
   
   describe "public methods" do
-    
+    describe "#destroy" do
+      it "fails when invoice is paid" do
+        invoice.paid = true
+        invoice_item.destroy.should be_false
+      end
+      
+      it "fails when invoice is sent" do
+        invoice.sent = true
+        invoice_item.destroy.should be_false
+      end
+    end
   end
   
   describe "private methods" do

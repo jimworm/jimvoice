@@ -5,6 +5,10 @@ class Invoice < ActiveRecord::Base
   validates :client, :currency, presence: true
   validates :currency, length: {is: 3}
   
+  def issued?
+    sent? or paid?
+  end
+  
   def total
     items.sum(:amount)
   end

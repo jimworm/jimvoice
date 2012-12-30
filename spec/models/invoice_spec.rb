@@ -36,6 +36,22 @@ describe "Invoice" do
   end
   
   describe "public methods" do
+    describe "#issued?" do
+      it "is true when sent" do
+        invoice.sent = true
+        invoice.should be_issued
+      end
+      
+      it "is true when paid" do
+        invoice.paid = true
+        invoice.should be_issued
+      end
+      
+      it "is false if unsent and unpaid" do
+        invoice.should_not be_issued
+      end
+    end
+    
     describe "#total" do
       before do
         invoice.items = 3.times.map{FactoryGirl.build :invoice_item, invoice: invoice, amount: 100.0}

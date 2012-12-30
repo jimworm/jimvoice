@@ -59,11 +59,13 @@ describe InvoicesController do
   describe "#show" do
     render_views
     
-    it "displays the total" do
-      Invoice.any_instance.stub(:total).and_return(100.0)
-      
+    it "displays the total and items list" do
+      invoice1.items << FactoryGirl.build(:invoice_item, invoice: invoice1, amount: 100.0, name: 'Doodads', description: 'Doody doodads')
+      invoice1.items << FactoryGirl.build(:invoice_item, invoice: invoice1, amount: 200.0, name: 'Wibbly', description: 'Wibbly doodads')
       get :show, client_id: client.id, id: invoice1.id
-      response.body.should include '100.0 ISK'
+      response.body.should include 'Total (ISK)'
+      response.body.should include '300.0'
+      response.body.should include 'Doodads'
     end
   end
 end
