@@ -1,0 +1,9 @@
+div.flash {
+  border-radius: 1em;
+  padding: 1em;
+  border: 2px solid;
+  margin-bottom: 2em;
+}
+
+#flash_error { background: #fcc; border-color: #933; }
+#flash_notice { background: #cfc; border-color: #393; }

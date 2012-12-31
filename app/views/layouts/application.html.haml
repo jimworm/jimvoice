@@ -14,7 +14,7 @@
     
     - if flash.any?
       - flash.each do |type, message|
-        .flash{id: type}
+        .flash{id: "flash_#{type}"}
           %p= message
     
     = yield
