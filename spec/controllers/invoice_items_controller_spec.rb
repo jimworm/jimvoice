@@ -5,6 +5,40 @@ describe InvoiceItemsController do
   let(:invoice)       { invoice_item.invoice }
   let(:invoice_item)  { FactoryGirl.create :invoice_item }
   
+  describe "#new" do
+    it "renders the form" do
+      get :new, client_id: client.id, invoice_id: invoice.id
+      response.should render_template :new
+    end
+  end
+  
+  describe "#create" do
+    context "with valid inputs" do
+      it "creates the item" do
+        expect {
+          post :create, client_id: client.id, invoice_id: invoice.id, id: invoice_item.id,
+            invoice_item: FactoryGirl.attributes_for(:invoice_item).slice(:name, :description, :amount)
+        }.to change {
+          invoice.items.count
+        }.by(1)
+      end
+      
+      it "redirects to the invoice" do
+        post :create, client_id: client.id, invoice_id: invoice.id, id: invoice_item.id,
+          invoice_item: FactoryGirl.attributes_for(:invoice_item).slice(:name, :description, :amount)
+        response.should redirect_to client_invoice_path(client, invoice)
+      end
+    end
+    
+    context "with invalid inputs" do
+      it "re-renders the form" do
+        post :create, client_id: client.id, invoice_id: invoice.id, id: invoice_item.id,
+          invoice_item: FactoryGirl.attributes_for(:invoice_item).slice(:name, :description)
+        response.should render_template :new
+      end
+    end
+  end
+  
   describe "#edit" do
     it "renders the form" do
       get :edit, client_id: client.id, invoice_id: invoice.id, id: invoice_item.id

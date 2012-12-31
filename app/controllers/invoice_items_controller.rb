@@ -5,6 +5,11 @@ class InvoiceItemsController < ApplicationController
   
   def create
     @invoice_item = invoice.items.build invoice_item_params
+    if @invoice_item.save
+      redirect_to client_invoice_path client, invoice
+    else
+      render :new
+    end
   end
   
   def edit
