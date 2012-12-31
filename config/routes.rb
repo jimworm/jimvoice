@@ -4,9 +4,7 @@ Jimvoice::Application.routes.draw do
   resources :clients, only: :index do
     resources :invoices, except: :destroy do
       resources :invoice_items, except: [:index, :show]
-      member do
-        put :issue, :pay
-      end
+      member { put :issue, :pay }
     end
   end
 end

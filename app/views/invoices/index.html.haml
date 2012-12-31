@@ -1,4 +1,9 @@
-%h1== Invoices of #{client.name}
+%h1== Invoice list
+
+.invoice_details
+  %p
+    Client:
+    = client.name
 
 %table#data_table
   %thead

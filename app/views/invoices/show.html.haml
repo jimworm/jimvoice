@@ -7,7 +7,7 @@
 .invoice_details
   %p
     Client:
-    = client.name
+    = link_to client.name, client_invoices_path(client)
   %p
     Currency:
     = invoice.currency.upcase
