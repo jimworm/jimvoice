@@ -68,4 +68,45 @@ describe InvoicesController do
       response.body.should include 'Doodads'
     end
   end
+  
+  describe "#issue" do
+    context "with an empty invoice" do
+      it "fails to send and shows the error" do
+        put :issue, client_id: client.id, id: invoice1.id
+        response.should redirect_to client_invoice_path(client, invoice1)
+        flash[:error].should include 'Invoices must have items to be issued'
+      end
+    end
+    
+    context "with an invoice containing items" do
+      before { invoice1.items << FactoryGirl.build(:invoice_item, invoice: invoice1) }
+      
+      context "that's not yet issued" do
+        it "sends the invoice" do
+          put :issue, client_id: client.id, id: invoice1.id
+          response.should redirect_to client_invoice_path client, invoice1
+          flash[:notice].should include 'Invoice successfully issued'
+        end
+      end
+    
+      context "that's already issued" do
+        before { invoice1.sent = true; invoice1.save! }
+        
+        it "resends the invoice" do
+          put :issue, client_id: client.id, id: invoice1.id
+          response.should redirect_to client_invoice_path client, invoice1
+          flash[:notice].should include 'Invoice successfully re-issued'
+        end
+      end
+    end
+  end
+  
+  describe "#pay" do
+    it "marks the invoice as paid and redirects back to its page" do
+      expect {
+        put :pay, client_id: client.id, id: invoice1.id
+        response.should redirect_to client_invoice_path client, invoice1
+      }.to change{ invoice1.reload.paid? }.from(false).to(true)
+    end
+  end
 end

@@ -20,6 +20,21 @@ class InvoicesController < ApplicationController
   def show
   end
   
+  def issue
+    success_message = "Invoice successfully #{'re-' if invoice.issued?}issued"
+    invoice.issue!
+    flash[:notice] = success_message
+  rescue => e
+    flash[:error] = e.message
+  ensure
+    redirect_to [client, invoice]
+  end
+  
+  def pay
+    invoice.update_attribute :paid, true
+    redirect_to [client, invoice]
+  end
+  
   private
   def invoice
     @invoice ||= client.invoices.find(params[:id])

@@ -2,6 +2,7 @@
   = invoice.reference
   = invoice.sent_at || invoice.created_at
   = '(unsent)' if not invoice.issued?
+  = '[PAID]' if invoice.paid?
 
 .invoice_details
   %p
@@ -25,3 +26,7 @@
     %tr
       %td{style: 'text-align:right'}= "Total (#{invoice.currency.upcase})"
       %td= invoice.total
+
+.invoice_actions
+  = link_to "#{invoice.issued? ? 'Re-issue' : 'Issue'} invoice", issue_client_invoice_path(client, invoice), method: :put
+  = link_to "Mark paid", pay_client_invoice_path(client, invoice), method: :put unless invoice.paid?

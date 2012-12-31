@@ -70,12 +70,12 @@ describe "Invoice" do
       end
     end
     
-    describe "#send!" do
+    describe "#issue!" do
       context "when not saved" do
         before { 2.times { invoice.items << FactoryGirl.build(:invoice_item, invoice: invoice) } }
         
         it "fails" do
-          expect { invoice.send! }.to raise_error
+          expect { invoice.issue! }.to raise_error
         end
       end
       
@@ -83,7 +83,7 @@ describe "Invoice" do
         before { invoice.save! }
         
         it "fails" do
-          expect { invoice.send! }.to raise_error
+          expect { invoice.issue! }.to raise_error
         end
       end
       
@@ -94,12 +94,12 @@ describe "Invoice" do
         end
       
         it "sets :sent to true" do
-          invoice.send!
+          invoice.issue!
           invoice.should be_sent
         end
       
         it "sets :sent_at to today" do
-          invoice.send!
+          invoice.issue!
           invoice.sent_at.should == Date.today
         end
       end

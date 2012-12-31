@@ -17,7 +17,7 @@ class Invoice < ActiveRecord::Base
     format 'JM%06d', id
   end
   
-  def send!
+  def issue!
     fail 'Only saved invoices can be issued' unless persisted?
     fail 'Invoices must have items to be issued' if items.empty?
     

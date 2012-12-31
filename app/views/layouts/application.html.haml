@@ -4,11 +4,17 @@
   = javascript_include_tag "application"
   = csrf_meta_tags
 
-%body{ :class => "#{controller.controller_name} main" }
+%body
   #mainwrap
     %header
       - if not Rails.env.production?
         %div{style:'background:red;color:white;padding:1em;text-align:center'} TEST MODE
       %p= "Logged in as '#{current_user.name}'"
       Jim's Jams and Marmalades
+    
+    - if flash.any?
+      - flash.each do |type, message|
+        .flash{id: type}
+          %p= message
+    
     = yield

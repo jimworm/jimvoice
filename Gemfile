@@ -25,6 +25,10 @@ end
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
 
+group :development do
+  gem 'letter_opener'
+end
+
 group :test do
   gem 'factory_girl_rails'
 end
