@@ -1,9 +1,4 @@
 %h1= "New invoice for #{client.name}"
 
 =form_for [client, invoice] do |f|
-  
-  = f.label :currency
-  = f.text_field :currency
-  = f.error_message_on :currency
-  
-  = f.submit 'Create'
+  = render 'form_fields', f: f

@@ -1,22 +1,7 @@
 %h1
-  Item in invoice
+  Edit item in invoice
   = invoice.reference
   = "(#{client.name})"
 
 =form_for [client, invoice, invoice_item] do |f|
-  
-  = f.label :name
-  = f.text_field :name
-  = f.error_message_on :name
-  
-  
-  = f.label :description
-  = f.text_area :description
-  = f.error_message_on :description
-  
-  
-  = f.label :amount
-  = f.text_field :amount
-  = f.error_message_on :amount
-  
-  = f.submit
+  = render 'form_fields', f: f

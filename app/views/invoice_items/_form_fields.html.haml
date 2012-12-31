@@ -1,0 +1,17 @@
+%dl
+  %dt
+    = f.label :name
+    = f.error_message_on :name
+  %dd= f.text_field :name
+  
+  %dt
+    = f.label :description
+    = f.error_message_on :description
+  %dd= f.text_area :description
+  
+  %dt
+    = f.label :amount
+    = f.error_message_on :amount
+  %dd= f.text_field :amount
+
+= f.submit

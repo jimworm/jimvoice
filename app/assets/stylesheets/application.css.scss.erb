@@ -13,6 +13,8 @@ module AssetPath
 end
 %>
 
+$wallpaper_color: #<%= (Rails.env.staging? ? '000' : 'ddd') %>;
+
 @import 'reset';
 @import 'base';
 

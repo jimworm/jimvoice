@@ -3,7 +3,7 @@ Jimvoice::Application.routes.draw do
   
   resources :clients, only: :index do
     resources :invoices, except: :destroy do
-      resources :invoice_items, except: :index
+      resources :invoice_items, except: [:index, :show]
     end
   end
 end
