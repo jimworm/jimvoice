@@ -20,7 +20,7 @@
         = "(#{link_to 'add new', new_client_invoice_invoice_item_path(client, invoice)})".html_safe if not invoice.issued?
       %th Amount
   
-  %tbody= render partial: 'invoice_items/list', collection: invoice.items, as: :invoice_item
+  %tbody{:class => 'invoice_items_list'}= render partial: 'invoice_items/list', collection: invoice.items, as: :invoice_item
   
   %tfoot
     %tr
