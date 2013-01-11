@@ -22,11 +22,14 @@ describe "InvoiceItem" do
     end
     
     describe ":name" do
-      
+      it "is required" do
+        invoice_item.name = nil
+        invoice_item.should_not be_valid
+      end
     end
     
     describe ":description" do
-      
+      # No requirements
     end
   end
   
@@ -65,9 +68,5 @@ describe "InvoiceItem" do
         invoice_item.destroy.should be_false
       end
     end
-  end
-  
-  describe "private methods" do
-    
   end
 end

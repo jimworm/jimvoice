@@ -1,5 +1,5 @@
 %tr
-  %td= client.name
+  %td= link_to client.name, client_path(client), title: 'Show client details'
   %td= client.invoices.last.try(:created_at)
   %td
     = link_to 'Show invoices', client_invoices_path(client), id: "client_list_action_#{client.id}_show_invoices", title: "Show list of client's invoices"

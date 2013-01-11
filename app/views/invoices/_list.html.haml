@@ -1,4 +1,4 @@
 %tr
-  %td= link_to "#{invoice.reference} #{invoice.sent_at || invoice.created_at} #{'(unsent)' if not invoice.sent?}", client_invoice_path(client, invoice)
+  %td= link_to "#{invoice.reference} #{invoice.sent_at || invoice.created_at} #{'(unsent)' if not invoice.sent?}", client_invoice_path(client, invoice), title: 'Show invoice'
   %td= invoice.total
   %td= invoice.currency.upcase

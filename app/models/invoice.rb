@@ -1,4 +1,6 @@
 class Invoice < ActiveRecord::Base
+  attr_accessible :currency
+  
   belongs_to :client
   has_many :items, class_name: 'InvoiceItem', validate: true, autosave: true, dependent: :destroy
   

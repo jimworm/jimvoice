@@ -8,10 +8,9 @@ class InvoicesController < ApplicationController
   end
   
   def create
-    @invoice = client.invoices.build
-    @invoice.currency = params[:invoice][:currency]
+    @invoice = client.invoices.build invoice_params
     if @invoice.save
-      redirect_to client_invoice_path(client, @invoice)
+      redirect_to [client, @invoice]
     else
       render :new
     end
@@ -36,6 +35,10 @@ class InvoicesController < ApplicationController
   end
   
   private
+  def invoice_params
+    params[:invoice].slice(:currency)
+  end
+  
   def invoice
     @invoice ||= client.invoices.find(params[:id])
   end
