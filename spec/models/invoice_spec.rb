@@ -64,9 +64,9 @@ describe "Invoice" do
     end
     
     describe "#reference" do
-      it "is the letters JM with a 6-zero-padded :id" do
+      it "is the configured prefix with a 6-figure-zero-padded :id" do
         invoice.stub(:id).and_return(3)
-        invoice.reference.should == 'JM000003'
+        invoice.reference.should == 'EX000003'
       end
     end
     

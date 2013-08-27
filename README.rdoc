@@ -1,3 +1,3 @@
 == Jimvoice
 
-Simple invoice sender for Jim's Jams and Marmalades on Heroku.
+Simple invoice sender by Jim's Jams and Marmalades, compatible for use on Heroku.

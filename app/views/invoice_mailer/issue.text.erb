@@ -1,11 +1,6 @@
 <%= @invoice.sent ? 'INVOICE COPY' : 'INVOICE' %>
 
-From:           Jim's Jams and Marmalades Limited (Hong Kong CR number 1753356)
-                Ground Floor
-                11 First Lane
-                Yin Kong
-                Sheung Shui, NT
-                Hong Kong
+From:           <%= CONFIG[:company][:mailing_address].lines.join '                ' %>
 
 To:             <%= @client.name %>
                 <%= @client.email %>
@@ -31,8 +26,5 @@ Details
 
 Payment details
 ================================================================================
-Bank:           Shanghai Commercial Bank
-SWIFT BIC:      SCBKHKHHXXX
-Account number: 025-342-28-11480-7
-Account name:   Jim's Jams and Marmalades Limited
+<%= CONFIG[:company][:payment_details].rstrip %>
 Reference:      <%= @invoice.reference %>

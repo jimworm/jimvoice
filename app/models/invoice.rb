@@ -16,7 +16,7 @@ class Invoice < ActiveRecord::Base
   end
   
   def reference
-    format 'JM%06d', id
+    format "#{CONFIG[:company][:invoice_prefix]}%06d", id
   end
   
   def issue!

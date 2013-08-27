@@ -19,8 +19,12 @@ describe "InvoiceMailer" do
       mailer.to.should include(invoice.client.email)
     end
     
+    it "is bcc'd to the finance contact" do
+      mailer.bcc.should include('finance@example.com')
+    end
+    
     it "has the right subject" do
-      mailer.subject.should include("Jim's Jams and Marmalades Invoice")
+      mailer.subject.should include("Example.com Invoice")
     end
     
     context "when not in production" do
