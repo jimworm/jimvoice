@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
       @current_user = user if user.try(:authenticate, password)
     end
   end
+  
+  def not_found(message = 'Record not found')
+    fail ActionController::RoutingError.new(message)
+  end
 end

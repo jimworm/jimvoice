@@ -1,9 +1,11 @@
 %h1== Invoice list
 
 .invoice_details
+  %p= link_to 'New invoice', new_client_invoice_path(client)
   %p
     Client:
     = client.name
+    
 
 %table#data_table
   %thead

@@ -1,0 +1,10 @@
+%dl
+  %dt
+    = f.label :name
+    = f.error_message_on :name
+  %dd= f.text_field :name
+
+  %dt
+    = f.label :email
+    = f.error_message_on :email
+  %dd= f.email_field :email
